@@ -1,0 +1,26 @@
+{
+  "name": "instant-chat",
+  "version": "0.0.1",
+  "description": "Instant chat",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kimserey/instant-chat.git"
+  },
+  "keywords": [
+    "chat"
+  ],
+  "author": "Kimserey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kimserey/instant-chat/issues"
+  },
+  "homepage": "https://github.com/Kimserey/instant-chat.git",
+  "dependencies": {
+    "express": "^4.4.2",
+    "socket.io": "^1.0.4"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
