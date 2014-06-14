@@ -181,7 +181,8 @@ webchat.shell = (function () {
 
 		webchat.data.initModule();
 		sio = webchat.data.getSio();
-
+		jqueryMap.$input.focus();
+		
 		// Show command list on first load
 		onNotificationReceived( [
 			{ message : 'Welcome to my webchat ! (/user xx : change username ~ /list : show online users  ~ /clear : clear tchat)' }

@@ -1,7 +1,8 @@
 * { 
-	margin: 0; 
-	padding: 0; 
-	box-sizing: border-box; 
+	margin 		: 0; 
+	padding 	: 0; 
+	box-sizing 	: border-box; 
+	overflow-y  : hidden;
 }
 
 body {
@@ -9,52 +10,53 @@ body {
 }
 
 form { 
-	padding: 3px; 
-	position: fixed;
-	bottom: 0; 
-	width: 100%;
+	position 	: fixed;
+	padding  	: 3px; 
+	bottom 		: 0; 
+	width		: 100%;
 }
 
 form input { 
-	border: 1px solid; 
-	padding: 10px;
-	width: 90%; 
-	margin-right: .5%; 
+	border 		 : 1px solid; 
+	padding 	 : 10px;
+	width 		 : 90%; 
+	margin-right : .5%; 
 }
 
 form button {
- 	width: 9%; 
- 	background: rgb(130, 224, 255); 
- 	padding: 10px; 
+ 	width 		: 9%; 
+ 	background 	: rgb(130, 224, 255); 
+ 	padding 	: 10px; 
 
 }
 	form button:hover {
-		background-color: #B8B1BE;
-		cursor: pointer;
+		background-color 	: #B8B1BE;
+		cursor 				: pointer;
 	}
 
 .webchat-logs {
-	overflow-y : scroll;
+	overflow-y 	: auto;
+	max-height: 500px;
 }
 
 .webchat-messages { 
-	list-style-type: none;
-	margin: 0; 
-	padding: 0; 
-	bottom: 20px;
+	list-style-type : none;
+	margin 			: 0; 
+	padding 		: 0; 
+	bottom 			: 20px;
 }
 	.webchat-messages li { 
-		padding: 5px 10px;
+		padding 	: 5px 10px;
 	}
 		.webchat-messages li:nth-child(odd) {
-			background: #eee;
+			background : #eee;
 		}
 
 .webchat-messages-username {
-	font-weight: bold;
+	font-weight : bold;
 }
 
 .webchat-messages-notification {
-	background : #58A9E4 ! important;
-	border-bottom: 1px solid black;
+	background 		: #58A9E4 ! important;
+	border-bottom 	: 1px solid black;
 }
