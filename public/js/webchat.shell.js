@@ -6,7 +6,7 @@
  devel  : true, indent    : 2,    maxerr   : 50,
  newcap : true, nomen     : true, plusplus : true,
  regexp : true, sloppy    : true, vars     : false,
- white  : true
+ white  : true, todo      : true
 */
 
 /*global $, webchat */
@@ -16,7 +16,9 @@ webchat.shell = (function () {
 	'use strict';
 	var
 	 main_html = String()
-	 	+ '<ul id="messages" class="webchat-messages"></ul>'
+	 	+ '<div class="webchat-logs">'
+	 		+ '<ul id="messages" class="webchat-messages"></ul>'
+	 	+ '<div>'
 		+ '<form action="">'
 			+ '<input id="m" autocomplete="off" /><button>Send</button>'
  		+ '</form>',
@@ -26,7 +28,7 @@ webchat.shell = (function () {
 	onFormSubmitted, onMessageReceived, 
 	onNotificationReceived, onListchateeReceived,
 
-	sio, setJqueryMap, initModule;
+	sio, setJqueryMap, clearMessages, initModule;
 	 
 	// ----- END MODULE SCOPE VARIABLES -----
 	
@@ -39,10 +41,18 @@ webchat.shell = (function () {
 			$container 		: $container,
 			$messagelist 	: $( '#messages' ),
 			$input 			: $( '#m' ),
-			$form 			: $( 'form' )
+			$form 			: $( 'form' ),
+			$messagelogs 	: $( '.webchat-logs' )
 		};
 	};
 	// End DOM method /setJqueryMap/
+
+	// Begin DOM method /clearMessages/
+	clearMessages = function () {
+		var $message_list = jqueryMap.$messagelist;
+		$message_list.empty();
+	};
+	// End DOM method /clearMessages/
 	// ----- END DOM METHODS -----
 
 	// ----- BEGIN EVENT HANDLERS METHODS -----
@@ -60,6 +70,9 @@ webchat.shell = (function () {
 			}
 			else if ( msg.indexOf( '/list' ) === 0 ) {
 				sio.emit( 'listchatee', {} );
+			}
+			else if ( msg.indexOf( '/clear' ) === 0) {
+				clearMessages();
 			}
 			else {
 				sio.emit( 'chatmessage', msg );
@@ -87,11 +100,27 @@ webchat.shell = (function () {
 		var 
 		 chat_message 	= arg_list[0],
 		 user_name 		= chat_message.user_name,
-		 message 		= chat_message.message;
+		 message 		= chat_message.message,
+		 $message_list  = jqueryMap.$messagelist,
+		 $message_logs  = jqueryMap.$messagelogs;
 
-		jqueryMap
-		 .$messagelist
-		 .append( $( '<li>' ).text( user_name + ' : ' + message ) );
+		$message_list
+		 .append( $( '<li>' ).html( 
+		 	'<span class="webchat-messages-username">' 
+		 	 + user_name 
+		 	+ ' said : </span>'  
+		 	+ message ) );
+
+		// TODO : Bug - After message received set
+		//               the scroll bar position to
+		//               the last message received
+		//
+		// $message_logs.animate(
+		// 	{ scrollTop : $message_logs.prop( 'scrollHeight' )
+		// 		- $message_logs.height()
+		// 	},
+		// 	150
+		// );
 	};
 	// End /onMessageReceived/ event handler
 
@@ -152,6 +181,11 @@ webchat.shell = (function () {
 
 		webchat.data.initModule();
 		sio = webchat.data.getSio();
+
+		// Show command list on first load
+		onNotificationReceived( [
+			{ message : 'Welcome to my webchat ! (/user xx : change username ~ /list : show online users  ~ /clear : clear tchat)' }
+		]);
 
 		// Register UI events
 		jqueryMap.$form.submit( onFormSubmitted );

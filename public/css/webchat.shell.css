@@ -1,5 +1,5 @@
 * { 
-	margin:0; 
+	margin: 0; 
 	padding: 0; 
 	box-sizing: border-box; 
 }
@@ -9,15 +9,14 @@ body {
 }
 
 form { 
-	background: #000;
 	padding: 3px; 
 	position: fixed;
 	bottom: 0; 
-	width: 100%; 
+	width: 100%;
 }
 
 form input { 
-	border: 0; 
+	border: 1px solid; 
 	padding: 10px;
 	width: 90%; 
 	margin-right: .5%; 
@@ -25,14 +24,24 @@ form input {
 
 form button {
  	width: 9%; 
- 	background: rgb(130, 224, 255);
- 	border: none; padding: 10px; 
+ 	background: rgb(130, 224, 255); 
+ 	padding: 10px; 
+
+}
+	form button:hover {
+		background-color: #B8B1BE;
+		cursor: pointer;
+	}
+
+.webchat-logs {
+	overflow-y : scroll;
 }
 
 .webchat-messages { 
 	list-style-type: none;
 	margin: 0; 
 	padding: 0; 
+	bottom: 20px;
 }
 	.webchat-messages li { 
 		padding: 5px 10px;
@@ -40,6 +49,10 @@ form button {
 		.webchat-messages li:nth-child(odd) {
 			background: #eee;
 		}
+
+.webchat-messages-username {
+	font-weight: bold;
+}
 
 .webchat-messages-notification {
 	background : #58A9E4 ! important;
