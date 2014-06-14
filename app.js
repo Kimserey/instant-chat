@@ -62,7 +62,7 @@ io.on( 'connection', function ( socket ) {
 
 		socket.user_name = user_name;
 		idx = chateeList.indexOf( old_name );
-		chateeList.splice(idx, 1);
+		chateeList.splice( idx, 1 );
 		chateeList.push( new_name );
 		emitNotification( old_name + ' change to ' + new_name );
 	});
